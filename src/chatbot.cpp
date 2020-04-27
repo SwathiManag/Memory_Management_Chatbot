@@ -15,6 +15,7 @@ ChatBot::ChatBot()
     _image = nullptr;
     _chatLogic = nullptr;
     _rootNode = nullptr;
+    _filename = "";
 }
 
 // constructor WITH memory allocation
@@ -28,6 +29,7 @@ ChatBot::ChatBot(std::string filename)
 
     // load image into heap memory
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
+    _filename = filename;
 }
 
 ChatBot::~ChatBot()
@@ -40,10 +42,63 @@ ChatBot::~ChatBot()
         delete _image;
         _image = NULL;
     }
+    _chatLogic = NULL;
+    _rootNode = NULL;  
+    _currentNode = NULL; 
 }
 
 //// STUDENT CODE
 ////
+
+ChatBot::ChatBot(ChatBot &source){
+    _image = new wxBitmap(_filename, wxBITMAP_TYPE_PNG);
+    *_image = *source._image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+    std::cout << "ChatBot COPY Constructor\n";
+}
+
+ChatBot &ChatBot::operator=(ChatBot &source){
+    std::cout << "ChatBot COPY Assignment Operator\n";
+    if(this == &source)
+        return *this;
+    delete _image;
+    _image = new wxBitmap(_filename, wxBITMAP_TYPE_PNG);
+    *_image = *source._image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+    return *this;
+}
+
+ChatBot::ChatBot(ChatBot &&source){ 
+    std::cout << "ChatBot MOVE Constructor\n";
+    _image = source._image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+    source._image = NULL;
+    source._chatLogic = NULL;
+    source._rootNode = NULL;  
+    source._currentNode = NULL; 
+}
+
+ChatBot &ChatBot::operator=(ChatBot &&source){
+    std::cout << "ChatBot MOVE Assignment Operator\n";
+    if(this == &source)
+        return *this;
+    delete _image;
+    _image = source._image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+    source._image = NULL;
+    source._chatLogic = NULL;
+    source._rootNode = NULL;  
+    source._currentNode = NULL; 
+    return *this;    
+}
 
 ////
 //// EOF STUDENT CODE
