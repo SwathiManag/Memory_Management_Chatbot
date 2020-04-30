@@ -32,6 +32,7 @@ ChatBot::ChatBot(std::string filename)
     _filename = filename;
 }
 
+// ChatBot Destructor
 ChatBot::~ChatBot()
 {
     std::cout << "ChatBot Destructor" << std::endl;
@@ -50,6 +51,7 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+//ChatBot COPY Constructor
 ChatBot::ChatBot(ChatBot &source){
     _image = new wxBitmap(*source._image);
     _chatLogic = source._chatLogic;
@@ -59,6 +61,7 @@ ChatBot::ChatBot(ChatBot &source){
     std::cout << "ChatBot COPY Constructor\n";
 }
 
+//ChatBot COPY Assignment Operator
 ChatBot &ChatBot::operator=(ChatBot &source){
     std::cout << "ChatBot COPY Assignment Operator\n";
     if(this == &source)
@@ -72,6 +75,7 @@ ChatBot &ChatBot::operator=(ChatBot &source){
     return *this;
 }
 
+//ChatBot MOVE Constructor
 ChatBot::ChatBot(ChatBot &&source){ 
     std::cout << "ChatBot MOVE Constructor\n";
     _image = source._image;
@@ -87,6 +91,7 @@ ChatBot::ChatBot(ChatBot &&source){
     source._currentNode = NULL; 
 }
 
+//ChatBot MOVE Assignment Operator
 ChatBot &ChatBot::operator=(ChatBot &&source){
     std::cout << "ChatBot MOVE Assignment Operator\n";
     if(this == &source)

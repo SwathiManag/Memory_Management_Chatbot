@@ -8,15 +8,7 @@ GraphNode::GraphNode(int id)
 }
 
 GraphNode::~GraphNode()
-{
-    //// STUDENT CODE
-    ////
-
-//    delete _chatBot; 
-
-    ////
-    //// EOF STUDENT CODE
-}
+{}
 
 void GraphNode::AddToken(std::string token)
 {
@@ -44,7 +36,6 @@ void GraphNode::MoveChatbotHere(ChatBot chatbot)
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
     newNode->MoveChatbotHere(std::move(_chatBot));
-    //_chatBot = nullptr; // invalidate pointer at source
 }
 ////
 //// EOF STUDENT CODE
